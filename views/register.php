@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="./assets/css/main.css">
@@ -16,7 +17,7 @@
 <div class="container">
     <h3>Datos de contacto</h3>
     <hr>
-    <form action="../controllers/users_controller.php?opc=1" method="post">
+    <form id="frmUser" action="../controllers/users_controller.php?opc=1" method="post">
         <div class="form-group">
             <label for="txtNombre">Nombre</label>
             <input type="text" name="txtNombre" id="txtNombre" required class="form-control" placeholder="Ingrese nombre" aria-describedby="helpId">
@@ -41,8 +42,33 @@
             <label for="txtEmail">Contraseña</label>
             <input type="password" name="txtPassword" id="txtPassword" required class="form-control" placeholder="Ingrese la contraseña" aria-describedby="helpId">
         </div>
+        <!--
         <button type="submit" class="btn btn-primary">Crear Usuario</button>
+        -->
+
+        <input type="button" id="btnEnviar" value="Cargar html externo">
     </form>
+    <div id="cargaexterna"></div>
 </div>
 </body>
 </html>
+<script>
+    $(document).ready(function()
+    {
+        $("#btnEnviar").click(function(){
+
+            $.ajax(
+                {
+                    url: "../controllers/users_controller.php?opc=1",
+                    type: "post",
+                    data: $("#frmUser").serialize(),
+                    success: function(data){
+                        $("#cargaexterna").html(data);
+                    } 
+                }
+            );
+        });
+    }
+    );
+
+</script>

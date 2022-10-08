@@ -17,8 +17,9 @@
                 $objUser = new USERMODEL($nombre,$apepat,$apemat,$email,$nick,$pass);
                 $objUser->INSUSER($conBD);
 
+                echo "Usuario registrado";
                 break;
-        case 2:
+        case 2: echo 'Hola estoy en el controlador';
         case 3:
 
     }
